@@ -52,8 +52,17 @@
 #pragma mark - Placeholder Templates
 
 - (void)getLocalizableSampleTemplateForComplication:(CLKComplication *)complication withHandler:(void(^)(CLKComplicationTemplate * __nullable complicationTemplate))handler {
-    // This method will be called once per supported complication, and the results will be cached
-    handler(nil);
+    CLKComplicationTemplateUtilitarianSmallRingText *templ = [[CLKComplicationTemplateUtilitarianSmallRingText alloc]init];
+    UIImage *image = [UIImage imageNamed:@"Utilitarian"];
+    CLKImageProvider *imageprovider = [[CLKImageProvider alloc]init];
+    imageprovider.onePieceImage = image;
+    
+    [templ setRingStyle:CLKComplicationRingStyleClosed];
+    CLKTextProvider *text = [CLKTextProvider textProviderWithFormat:@"Battery Level"];
+    [templ setTextProvider:text];
+    [templ setFillFraction:100.0];
+    handler(templ);
+    
 }
 
 @end

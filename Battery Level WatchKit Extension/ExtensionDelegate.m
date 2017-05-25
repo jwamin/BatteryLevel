@@ -8,10 +8,33 @@
 
 #import "ExtensionDelegate.h"
 
+
 @implementation ExtensionDelegate
 
 - (void)applicationDidFinishLaunching {
     // Perform any final initialization of your application.
+    
+//    if WCSession.isSupported() {
+//        let session = WCSession.defaultSession()
+//        session.delegate = self
+//        session.activateSession()
+//    }
+    
+    if([WCSession isSupported]){
+        WCSession *session = [WCSession defaultSession];
+        session.delegate = self;
+        [session activateSession];
+    }
+    
+    
+}
+
+-(void)session:(WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(NSError *)error{
+    NSLog(@"err hey, that appeared to work %ld",(long)activationState);
+}
+
+-(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message{
+    NSLog(@"%@",[message objectForKey:@"hello"]);
 }
 
 - (void)applicationDidBecomeActive {

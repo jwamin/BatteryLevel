@@ -8,7 +8,9 @@
 
 #import <WatchKit/WatchKit.h>
 #import <Foundation/Foundation.h>
+#import <WatchConnectivity/WatchConnectivity.h>
 
 @interface InterfaceController : WKInterfaceController
-
+- (IBAction)button;
+@property WCSession *session;
 @end

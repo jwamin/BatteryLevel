@@ -18,7 +18,7 @@
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
-
+    _session = [WCSession defaultSession];
     // Configure interface objects here.
 }
 
@@ -32,6 +32,11 @@
     [super didDeactivate];
 }
 
+- (IBAction)button {
+    NSLog(@"Hello world");
+    NSDictionary *dict = @{@"message":@"hello from my watch"};
+    [_session sendMessage:dict replyHandler:nil errorHandler:nil];
+}
 @end
 
 

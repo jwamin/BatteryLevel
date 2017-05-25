@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -17,9 +18,37 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    float level = [[UIDevice currentDevice]batteryLevel];
+    NSLog(@"%f",level);
+    if([WCSession isSupported]){
+        WCSession *session = [WCSession defaultSession];
+        session.delegate = self;
+        [session activateSession];
+        NSLog(@"%ld",(long)[session activationState]);
+    }
     return YES;
 }
 
+-(void)session:(WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(NSError *)error{
+    
+//    NSLog(@"eh? %ld",(long)activationState);
+//    NSDictionary *dict = @{@"hello":@"hello, if you are reading this message, it worked"};
+//    [session sendMessage:dict replyHandler:nil errorHandler:nil];
+    
+}
+
+-(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message{
+    NSLog(@"%@",message);
+}
+
+-(void)sessionDidBecomeInactive:(WCSession *)session{
+    NSLog(@"inactive");
+}
+
+-(void)sessionDidDeactivate:(WCSession *)session{
+    NSLog(@"deactivates");
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

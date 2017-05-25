@@ -93,6 +93,8 @@
 		3D3859CD1ED6437C0050FA87 /* ComplicationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComplicationController.m; sourceTree = "<group>"; };
 		3D3859CF1ED6437C0050FA87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D3859D11ED6437C0050FA87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D3859DF1ED755670050FA87 /* Battery Level.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Battery Level.entitlements"; sourceTree = "<group>"; };
+		3D3859E01ED765C20050FA87 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 		3D38598D1ED6437B0050FA87 = {
 			isa = PBXGroup;
 			children = (
+				3D3859E01ED765C20050FA87 /* .gitignore */,
 				3D3859981ED6437B0050FA87 /* Battery Level */,
 				3D3859B11ED6437B0050FA87 /* Battery Level WatchKit App */,
 				3D3859C01ED6437C0050FA87 /* Battery Level WatchKit Extension */,
@@ -136,6 +139,7 @@
 		3D3859981ED6437B0050FA87 /* Battery Level */ = {
 			isa = PBXGroup;
 			children = (
+				3D3859DF1ED755670050FA87 /* Battery Level.entitlements */,
 				3D38599C1ED6437B0050FA87 /* AppDelegate.h */,
 				3D38599D1ED6437B0050FA87 /* AppDelegate.m */,
 				3D38599F1ED6437B0050FA87 /* ViewController.h */,
@@ -262,6 +266,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 3C42F7N9CQ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					3D3859AC1ED6437B0050FA87 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -550,6 +559,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Battery Level/Battery Level.entitlements";
 				DEVELOPMENT_TEAM = 3C42F7N9CQ;
 				INFOPLIST_FILE = "Battery Level/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -562,6 +572,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Battery Level/Battery Level.entitlements";
 				DEVELOPMENT_TEAM = 3C42F7N9CQ;
 				INFOPLIST_FILE = "Battery Level/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -589,6 +600,7 @@
 				3D3859D61ED6437C0050FA87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3D3859D81ED6437C0050FA87 /* Build configuration list for PBXNativeTarget "Battery Level WatchKit App" */ = {
 			isa = XCConfigurationList;
@@ -597,6 +609,7 @@
 				3D3859DA1ED6437C0050FA87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3D3859DC1ED6437C0050FA87 /* Build configuration list for PBXNativeTarget "Battery Level" */ = {
 			isa = XCConfigurationList;
@@ -605,6 +618,7 @@
 				3D3859DE1ED6437C0050FA87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

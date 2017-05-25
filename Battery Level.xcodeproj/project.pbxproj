@@ -22,6 +22,8 @@
 		3D3859CB1ED6437C0050FA87 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3859CA1ED6437C0050FA87 /* NotificationController.m */; };
 		3D3859CE1ED6437C0050FA87 /* ComplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3859CD1ED6437C0050FA87 /* ComplicationController.m */; };
 		3D3859D01ED6437C0050FA87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D3859CF1ED6437C0050FA87 /* Assets.xcassets */; };
+		3D3859E31ED768A80050FA87 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3D3859E11ED768A80050FA87 /* LICENSE */; };
+		3D3859E41ED768A80050FA87 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 3D3859E21ED768A80050FA87 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +97,8 @@
 		3D3859D11ED6437C0050FA87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D3859DF1ED755670050FA87 /* Battery Level.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Battery Level.entitlements"; sourceTree = "<group>"; };
 		3D3859E01ED765C20050FA87 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		3D3859E11ED768A80050FA87 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		3D3859E21ED768A80050FA87 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,8 @@
 		3D38598D1ED6437B0050FA87 = {
 			isa = PBXGroup;
 			children = (
+				3D3859E11ED768A80050FA87 /* LICENSE */,
+				3D3859E21ED768A80050FA87 /* README.md */,
 				3D3859E01ED765C20050FA87 /* .gitignore */,
 				3D3859981ED6437B0050FA87 /* Battery Level */,
 				3D3859B11ED6437B0050FA87 /* Battery Level WatchKit App */,
@@ -311,6 +317,7 @@
 			files = (
 				3D3859A91ED6437B0050FA87 /* LaunchScreen.storyboard in Resources */,
 				3D3859A61ED6437B0050FA87 /* Assets.xcassets in Resources */,
+				3D3859E31ED768A80050FA87 /* LICENSE in Resources */,
 				3D3859A41ED6437B0050FA87 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,6 +348,7 @@
 			files = (
 				3D3859A11ED6437B0050FA87 /* ViewController.m in Sources */,
 				3D38599E1ED6437B0050FA87 /* AppDelegate.m in Sources */,
+				3D3859E41ED768A80050FA87 /* README.md in Sources */,
 				3D38599B1ED6437B0050FA87 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

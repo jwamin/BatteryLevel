@@ -34,7 +34,10 @@
 }
 
 -(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message{
-    NSLog(@"%@",[message objectForKey:@"hello"]);
+    NSLog(@"%@",message);
+    NSLog(@"%@",[message objectForKey:@"batteryStatus"]);
+    NSLog(@"%@",[message objectForKey:@"currentFloat"]);
+    
 }
 
 - (void)applicationDidBecomeActive {

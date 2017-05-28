@@ -40,6 +40,19 @@
 
 -(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message{
     NSLog(@"%@",message);
+    
+    if([[message objectForKey:@"request"] isEqual:@"currentBatteryLevelandStatus"]){
+        float batteryLevel = [[UIDevice currentDevice]batteryLevel];
+        //NSInteger state = *(NSInteger*)[[UIDevice currentDevice]batteryState];
+        long state = (long)[[UIDevice currentDevice]batteryState];
+        NSString *floatString = [NSString stringWithFormat:@"%f",batteryLevel];
+        NSString *statusString = [NSString stringWithFormat:@"%ld",state];
+        NSLog(@"floatstring: %@  statusstring: %@",floatString,@"1");
+        NSDictionary *dict = @{@"currentFloat":floatString,@"batteryStatus":statusString};
+        [session sendMessage:dict replyHandler:nil errorHandler:nil];
+    }
+    
+
 }
 
 -(void)sessionDidBecomeInactive:(WCSession *)session{

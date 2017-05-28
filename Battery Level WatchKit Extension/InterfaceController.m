@@ -34,7 +34,7 @@
 
 - (IBAction)button {
     NSLog(@"Hello world");
-    NSDictionary *dict = @{@"message":@"hello from my watch"};
+    NSDictionary *dict = @{@"request":@"currentBatteryLevelandStatus"};
     [_session sendMessage:dict replyHandler:nil errorHandler:nil];
 }
 @end

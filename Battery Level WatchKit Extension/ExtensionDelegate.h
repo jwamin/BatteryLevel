@@ -8,7 +8,12 @@
 
 #import <WatchKit/WatchKit.h>
 #import <WatchConnectivity/WatchConnectivity.h>
+#import "BatteryLevel-Swift.h"
+#import "InterfaceController.h"
 
-@interface ExtensionDelegate : NSObject <WKExtensionDelegate, WCSessionDelegate>
+@interface ExtensionDelegate : NSObject <WKExtensionDelegate, WCSessionDelegate, BatteryLevelHelperDelegate>
 
+@property WCSession *session;
+@property BatteryLevelHelper *helper;
+@property InterfaceController *mainView;
 @end

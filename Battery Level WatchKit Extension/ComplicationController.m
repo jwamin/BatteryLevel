@@ -6,7 +6,9 @@
 //  Copyright © 2017 Joss Manger. All rights reserved.
 //
 
+#import "ExtensionDelegate.h"
 #import "ComplicationController.h"
+#import "BatteryLevel-Swift.h"
 
 @interface ComplicationController ()
 
@@ -19,7 +21,8 @@
 #pragma mark - Timeline Configuration
 
 - (void)getSupportedTimeTravelDirectionsForComplication:(CLKComplication *)complication withHandler:(void(^)(CLKComplicationTimeTravelDirections directions))handler {
-    handler(CLKComplicationTimeTravelDirectionForward|CLKComplicationTimeTravelDirectionBackward);
+    //setting the time travel direction to backwards for the timebeing - can only rewind
+    handler(CLKComplicationTimeTravelDirectionBackward);
 }
 
 - (void)getTimelineStartDateForComplication:(CLKComplication *)complication withHandler:(void(^)(NSDate * __nullable date))handler {
@@ -38,7 +41,37 @@
 
 - (void)getCurrentTimelineEntryForComplication:(CLKComplication *)complication withHandler:(void(^)(CLKComplicationTimelineEntry * __nullable))handler {
     // Call the handler with the current timeline entry
-    handler(nil);
+    
+    ExtensionDelegate* myDelegate = (ExtensionDelegate*)[[WKExtension sharedExtension] delegate];
+    
+    BatteryLevelHelper *currentHelper = [[BatteryLevelHelper alloc]init];
+    
+    if([currentHelper.ready isEqualToNumber:[NSNumber numberWithBool:YES]]){
+        NSLog(@"helper is ready and has values");
+        
+        CLKComplicationTimelineEntry *entry = [[CLKComplicationTimelineEntry alloc]init];
+        CLKComplicationTemplateUtilitarianSmallRingText *templ = [[CLKComplicationTemplateUtilitarianSmallRingText alloc]init];
+        
+        UIImage *image = [UIImage imageNamed:@"Utilitarian"];
+        CLKImageProvider *imageprovider = [[CLKImageProvider alloc]init];
+        imageprovider.onePieceImage = image;
+        
+        [templ setRingStyle:CLKComplicationRingStyleClosed];
+        CLKTextProvider *text = [CLKTextProvider textProviderWithFormat:@"Battery Level"];
+        [templ setTextProvider:text];
+        [templ setFillFraction:[[currentHelper levelFloat]floatValue]];
+        
+        [entry setDate:currentHelper.date];
+        [entry setComplicationTemplate:templ];
+        
+        handler(entry);
+    } else {
+        handler(nil);
+    }
+    
+
+    
+    
 }
 
 - (void)getTimelineEntriesForComplication:(CLKComplication *)complication beforeDate:(NSDate *)date limit:(NSUInteger)limit withHandler:(void(^)(NSArray<CLKComplicationTimelineEntry *> * __nullable entries))handler {

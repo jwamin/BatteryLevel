@@ -32,27 +32,38 @@
 
 -(void)session:(WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(NSError *)error{
     
-//    NSLog(@"eh? %ld",(long)activationState);
+    NSLog(@"eh? %ld",(long)activationState);
 //    NSDictionary *dict = @{@"hello":@"hello, if you are reading this message, it worked"};
 //    [session sendMessage:dict replyHandler:nil errorHandler:nil];
     
 }
 
--(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message{
+-(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message replyHandler:(void (^)(NSDictionary<NSString *,id> * _Nonnull))replyHandler{
     NSLog(@"%@",message);
     
     if([[message objectForKey:@"request"] isEqual:@"currentBatteryLevelandStatus"]){
         float batteryLevel = [[UIDevice currentDevice]batteryLevel];
         //NSInteger state = *(NSInteger*)[[UIDevice currentDevice]batteryState];
         long state = (long)[[UIDevice currentDevice]batteryState];
-        NSString *floatString = [NSString stringWithFormat:@"%f",batteryLevel];
-        NSString *statusString = [NSString stringWithFormat:@"%ld",state];
-        NSLog(@"floatstring: %@  statusstring: %@",floatString,@"1");
-        NSDictionary *dict = @{@"currentFloat":floatString,@"batteryStatus":statusString};
+        NSNumber *batteryLevelfloat = [NSNumber numberWithFloat:batteryLevel];
+        NSNumber *statusEnum = [NSNumber numberWithLong:state];
+        NSDate *now = [[NSDate alloc]init];
+        NSDictionary *dict = @{@"currentLevelFloat":batteryLevelfloat,@"batteryStatus":statusEnum,@"currentDate":now};
         [session sendMessage:dict replyHandler:nil errorHandler:nil];
+        replyHandler(dict);
+    } else if([[message objectForKey:@"request"] isEqual:@"dummyBatteryLevelandStatus"]){
+        float batteryLevel = 76.0;
+        long state = 1;
+        NSNumber *batteryLevelfloat = [NSNumber numberWithFloat:batteryLevel];
+        NSNumber *statusEnum = [NSNumber numberWithLong:state];
+        NSDate *now = [[NSDate alloc]init];
+        NSDictionary *dict = @{@"currentLevelFloat":batteryLevelfloat,@"batteryStatus":statusEnum,@"currentDate":now};
+        [session sendMessage:dict replyHandler:nil errorHandler:nil];
+        replyHandler(dict);
     }
     
-
+    
+    
 }
 
 -(void)sessionDidBecomeInactive:(WCSession *)session{

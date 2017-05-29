@@ -14,12 +14,20 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController">
                     <items>
-                        <button width="1" alignment="left" title="Press Me!" id="yQN-ne-NvD">
-                            <connections>
-                                <action selector="button" destination="AgC-eL-Hgc" id="OI9-IU-LRf"/>
-                            </connections>
-                        </button>
+                        <label width="136" height="165" alignment="left" text="Loading" textAlignment="center" baselineAdjustment="alignCenters" id="lJN-cL-Ui3"/>
                     </items>
+                    <menu key="menu" id="E7U-t1-FbN">
+                        <items>
+                            <menuItem title="Menu Item" icon="resume" id="SLL-LG-lAK">
+                                <connections>
+                                    <action selector="reload" destination="AgC-eL-Hgc" id="i7o-V9-Fdh"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="label" destination="lJN-cL-Ui3" id="Ll0-rU-mNE"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>

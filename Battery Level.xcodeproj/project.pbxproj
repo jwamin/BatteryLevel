@@ -23,7 +23,7 @@
 		3D3859CE1ED6437C0050FA87 /* ComplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3859CD1ED6437C0050FA87 /* ComplicationController.m */; };
 		3D3859D01ED6437C0050FA87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D3859CF1ED6437C0050FA87 /* Assets.xcassets */; };
 		3D3859E31ED768A80050FA87 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3D3859E11ED768A80050FA87 /* LICENSE */; };
-		3D3859E41ED768A80050FA87 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 3D3859E21ED768A80050FA87 /* README.md */; };
+		3DE4A7741EDC680D00D0A396 /* BatteryLevelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE4A7731EDC680D00D0A396 /* BatteryLevelHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +99,8 @@
 		3D3859E01ED765C20050FA87 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3D3859E11ED768A80050FA87 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		3D3859E21ED768A80050FA87 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3DE4A7721EDC680C00D0A396 /* Battery Level WatchKit Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Battery Level WatchKit Extension-Bridging-Header.h"; sourceTree = "<group>"; };
+		3DE4A7731EDC680D00D0A396 /* BatteryLevelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatteryLevelHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,9 +190,11 @@
 				3D3859CA1ED6437C0050FA87 /* NotificationController.m */,
 				3D3859CC1ED6437C0050FA87 /* ComplicationController.h */,
 				3D3859CD1ED6437C0050FA87 /* ComplicationController.m */,
+				3DE4A7731EDC680D00D0A396 /* BatteryLevelHelper.swift */,
 				3D3859CF1ED6437C0050FA87 /* Assets.xcassets */,
 				3D3859D11ED6437C0050FA87 /* Info.plist */,
 				3D3859C11ED6437C0050FA87 /* Supporting Files */,
+				3DE4A7721EDC680C00D0A396 /* Battery Level WatchKit Extension-Bridging-Header.h */,
 			);
 			path = "Battery Level WatchKit Extension";
 			sourceTree = "<group>";
@@ -286,6 +290,7 @@
 					3D3859BB1ED6437C0050FA87 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 3C42F7N9CQ;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -348,7 +353,6 @@
 			files = (
 				3D3859A11ED6437B0050FA87 /* ViewController.m in Sources */,
 				3D38599E1ED6437B0050FA87 /* AppDelegate.m in Sources */,
-				3D3859E41ED768A80050FA87 /* README.md in Sources */,
 				3D38599B1ED6437B0050FA87 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,6 +365,7 @@
 				3D3859CE1ED6437C0050FA87 /* ComplicationController.m in Sources */,
 				3D3859C51ED6437C0050FA87 /* InterfaceController.m in Sources */,
 				3D3859CB1ED6437C0050FA87 /* NotificationController.m in Sources */,
+				3DE4A7741EDC680D00D0A396 /* BatteryLevelHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +437,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -451,6 +457,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_MODULE_NAME = BatteryLevel;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -481,6 +488,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -493,6 +501,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_MODULE_NAME = BatteryLevel;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -503,13 +512,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 3C42F7N9CQ;
 				INFOPLIST_FILE = "Battery Level WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jossy.btaskrunner.Battery-Level.watchkitapp.watchkitextension";
+				PRODUCT_MODULE_NAME = BatteryLevel;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Battery Level WatchKit Extension/Battery Level WatchKit Extension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 3.2;
 			};
@@ -519,13 +533,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 3C42F7N9CQ;
 				INFOPLIST_FILE = "Battery Level WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jossy.btaskrunner.Battery-Level.watchkitapp.watchkitextension";
+				PRODUCT_MODULE_NAME = BatteryLevel;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Battery Level WatchKit Extension/Battery Level WatchKit Extension-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 3.2;
 			};
@@ -534,6 +552,7 @@
 		3D3859D91ED6437C0050FA87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3C42F7N9CQ;
 				IBSC_MODULE = Battery_Level_WatchKit_Extension;
@@ -550,6 +569,7 @@
 		3D3859DA1ED6437C0050FA87 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3C42F7N9CQ;
 				IBSC_MODULE = Battery_Level_WatchKit_Extension;

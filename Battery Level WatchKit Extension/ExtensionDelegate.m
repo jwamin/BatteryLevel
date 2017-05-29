@@ -13,31 +13,46 @@
 
 - (void)applicationDidFinishLaunching {
     // Perform any final initialization of your application.
-    
-//    if WCSession.isSupported() {
-//        let session = WCSession.defaultSession()
-//        session.delegate = self
-//        session.activateSession()
-//    }
+
+    _mainView = (InterfaceController*)[[WKExtension sharedExtension]rootInterfaceController];
     
     if([WCSession isSupported]){
-        WCSession *session = [WCSession defaultSession];
-        session.delegate = self;
-        [session activateSession];
+        _helper = [[BatteryLevelHelper alloc]init];
+        _helper.delegate = self;
+        NSLog(@"supported");
+        _session = [WCSession defaultSession];
+        [_session setDelegate:self];
+        [_session activateSession];
+        
+        
     }
-    
     
 }
 
 -(void)session:(WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(NSError *)error{
-    NSLog(@"err hey, that appeared to work %ld",(long)activationState);
+    NSLog(@"%ld",(long)activationState);
+    
+    [_helper sendRequestMessage];
 }
 
--(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message{
-    NSLog(@"%@",message);
-    NSLog(@"%@",[message objectForKey:@"batteryStatus"]);
-    NSLog(@"%@",[message objectForKey:@"currentFloat"]);
-    
+//func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+//    print(message)
+//    setVariables(message: message)
+//}
+//
+//func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+//    print("\(activationState) whatever that means");
+//    if(activationState==WCSessionActivationState.activated){
+//        print("activated, sending request")
+//        self.sendRequestMessage()
+//    }
+//    
+//}
+
+- (void)dataReady
+{
+    NSLog(@"hello, got data in delegate");
+    [_mainView setLabel];
 }
 
 - (void)applicationDidBecomeActive {

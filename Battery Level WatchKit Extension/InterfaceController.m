@@ -7,10 +7,12 @@
 //
 
 #import "InterfaceController.h"
-
+#import "ExtensionDelegate.h"
+#import "BatteryLevel-Swift.h"
 
 @interface InterfaceController ()
-
+@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *label;
+@property ExtensionDelegate *delegate;
 @end
 
 
@@ -18,8 +20,18 @@
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
-    _session = [WCSession defaultSession];
+    _delegate = (ExtensionDelegate*)[[WKExtension sharedExtension] delegate];
     // Configure interface objects here.
+    [self setLabel];
+}
+
+ -(void)setLabel{
+     //NSString *bkupstr = @"unset";
+     NSString *setstr = [[_delegate.helper levelFloat]stringValue];
+     [_label setText:setstr];
+ }
+- (IBAction)reload {
+    [self setLabel];
 }
 
 - (void)willActivate {
@@ -32,11 +44,7 @@
     [super didDeactivate];
 }
 
-- (IBAction)button {
-    NSLog(@"Hello world");
-    NSDictionary *dict = @{@"request":@"currentBatteryLevelandStatus"};
-    [_session sendMessage:dict replyHandler:nil errorHandler:nil];
-}
+
 @end
 
 

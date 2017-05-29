@@ -26,11 +26,11 @@
 }
 
 - (void)getTimelineStartDateForComplication:(CLKComplication *)complication withHandler:(void(^)(NSDate * __nullable date))handler {
-    handler(nil);
+    handler([[NSDate alloc]init]);
 }
 
 - (void)getTimelineEndDateForComplication:(CLKComplication *)complication withHandler:(void(^)(NSDate * __nullable date))handler {
-    handler(nil);
+    handler([[NSDate alloc]init]);
 }
 
 - (void)getPrivacyBehaviorForComplication:(CLKComplication *)complication withHandler:(void(^)(CLKComplicationPrivacyBehavior privacyBehavior))handler {
@@ -44,7 +44,7 @@
     
     ExtensionDelegate* myDelegate = (ExtensionDelegate*)[[WKExtension sharedExtension] delegate];
     
-    BatteryLevelHelper *currentHelper = [[BatteryLevelHelper alloc]init];
+    BatteryLevelHelper *currentHelper = [myDelegate helper];
     
     if([currentHelper.ready isEqualToNumber:[NSNumber numberWithBool:YES]]){
         NSLog(@"helper is ready and has values");
@@ -56,16 +56,17 @@
         CLKImageProvider *imageprovider = [[CLKImageProvider alloc]init];
         imageprovider.onePieceImage = image;
         
-        [templ setRingStyle:CLKComplicationRingStyleClosed];
-        CLKTextProvider *text = [CLKTextProvider textProviderWithFormat:@"Battery Level"];
+        NSString *floatstring = [[currentHelper levelFloat]stringValue];
+        CLKTextProvider *text = [CLKTextProvider textProviderWithFormat:@"%@", floatstring];
         [templ setTextProvider:text];
-        [templ setFillFraction:[[currentHelper levelFloat]floatValue]];
+        [templ setFillFraction:[[currentHelper levelFloat]floatValue]/100];
         
         [entry setDate:currentHelper.date];
         [entry setComplicationTemplate:templ];
         
         handler(entry);
     } else {
+        NSLog(@"nilling out");
         handler(nil);
     }
     

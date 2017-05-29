@@ -53,6 +53,8 @@
 {
     NSLog(@"hello, got data in delegate");
     [_mainView setLabel];
+    CLKComplication *active = [[[CLKComplicationServer sharedInstance]activeComplications]objectAtIndex:0];
+    [[CLKComplicationServer sharedInstance]reloadTimelineForComplication:active];
 }
 
 - (void)applicationDidBecomeActive {

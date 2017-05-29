@@ -29,8 +29,15 @@
      //NSString *bkupstr = @"unset";
      NSString *setstr = [[_delegate.helper levelFloat]stringValue];
      [_label setText:setstr];
+     NSLog(@"did set label to %@",setstr);
+
  }
 - (IBAction)reload {
+    
+}
+
+-(void)didAppear{
+    NSLog(@"did appear");
     [self setLabel];
 }
 

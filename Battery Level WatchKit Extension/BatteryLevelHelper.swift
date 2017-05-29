@@ -39,8 +39,8 @@ class BatteryLevelHelper : NSObject {
     
     func sendRequestMessage(){
         
-        //let requestDict:[String:Any] = ["request":"currentBatteryLevelandStatus"];
-        let requestDict:[String:Any] = ["request":"dummyBatteryLevelandStatus"];
+        let requestDict:[String:Any] = ["request":"currentBatteryLevelandStatus"];
+        //let requestDict:[String:Any] = ["request":"dummyBatteryLevelandStatus"];
         session.sendMessage(requestDict, replyHandler: {
             (answer: [String : Any]) in
             print("hello world success \(answer)")

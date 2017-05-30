@@ -35,6 +35,7 @@
      NSLog(@"did set label to %@",setstr);
 
  }
+
 - (IBAction)reload {
     
 }

@@ -38,6 +38,9 @@
     
 }
 
+//Listen for changes to battery charging state, update complication
+
+
 -(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message replyHandler:(void (^)(NSDictionary<NSString *,id> * _Nonnull))replyHandler{
     NSLog(@"%@",message);
     

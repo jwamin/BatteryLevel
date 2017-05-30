@@ -38,7 +38,7 @@
  }
 
 - (IBAction)reload {
-    
+    [_delegate forceRefresh];
 }
 
 -(void)didAppear{

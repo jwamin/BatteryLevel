@@ -16,4 +16,5 @@
 @property WCSession *session;
 @property BatteryLevelHelper *helper;
 @property InterfaceController *mainView;
+- (void)forceRefresh;
 @end

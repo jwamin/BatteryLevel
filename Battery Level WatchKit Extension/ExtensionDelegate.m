@@ -49,6 +49,10 @@
 //    
 //}
 
+- (void)forceRefresh{
+    [_helper sendRequestMessage];
+}
+
 - (void)dataReady
 {
     NSLog(@"hello, got data in delegate");

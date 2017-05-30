@@ -22,7 +22,7 @@
 
 - (void)getSupportedTimeTravelDirectionsForComplication:(CLKComplication *)complication withHandler:(void(^)(CLKComplicationTimeTravelDirections directions))handler {
     
-    handler(CLKComplicationTimeTravelDirectionForward|CLKComplicationTimeTravelDirectionBackward);
+    handler(CLKComplicationTimeTravelDirectionForward);
 }
 
 - (void)getTimelineStartDateForComplication:(CLKComplication *)complication withHandler:(void(^)(NSDate * __nullable date))handler {
@@ -82,6 +82,43 @@
 
 - (void)getTimelineEntriesForComplication:(CLKComplication *)complication beforeDate:(NSDate *)date limit:(NSUInteger)limit withHandler:(void(^)(NSArray<CLKComplicationTimelineEntry *> * __nullable entries))handler {
     // Call the handler with the timeline entries prior to the given date
+//    ExtensionDelegate* myDelegate = (ExtensionDelegate*)[[WKExtension sharedExtension] delegate];
+//    
+//    BatteryLevelHelper *currentHelper = [myDelegate helper];
+//    
+//    NSMutableArray *array = [[NSMutableArray alloc]init];
+//    int count = 0;
+//    while([array count]<limit){
+//        CLKComplicationTimelineEntry *entry = [[CLKComplicationTimelineEntry alloc]init];
+//        
+//        CLKComplicationTemplateUtilitarianSmallRingText *templ = [[CLKComplicationTemplateUtilitarianSmallRingText alloc]init];
+//        
+//        UIImage *image = [UIImage imageNamed:@"Utilitarian"];
+//        
+//        if([[currentHelper status] isEqual:[NSNumber numberWithInt:2]]){
+//            image = [UIImage imageNamed:@"Complication/Charging"];
+//        }
+//        
+//        CLKImageProvider *imageprovider = [[CLKImageProvider alloc]init];
+//        imageprovider.onePieceImage = image;
+//        NSDate *nextdate = [date dateByAddingTimeInterval:(-count * 60)];
+//        NSNumber *calculatedFloat = [currentHelper estimateLevelWithDate:nextdate];
+//        NSLog(@"calculated float for %@ is %@",date,calculatedFloat);
+//        NSString *floatstring = [calculatedFloat stringValue];
+//        NSLog(@"calculated float stringvalue is %@",floatstring);
+//        CLKTextProvider *text = [CLKTextProvider textProviderWithFormat:@"%@", floatstring];
+//        [templ setTextProvider:text];
+//        [templ setFillFraction:[calculatedFloat floatValue]];
+//        
+//        [entry setDate:currentHelper.date];
+//        [entry setComplicationTemplate:templ];
+//        
+//        [array addObject:entry];
+//        count++;
+//    }
+//    
+//    
+//    handler([NSArray arrayWithArray:array]);
     handler(nil);
 }
 
@@ -92,9 +129,18 @@
     
     BatteryLevelHelper *currentHelper = [myDelegate helper];
     
+    NSDate *endDate = [[[NSDate alloc]init] dateByAddingTimeInterval:(60*60)];
+    
     NSMutableArray *array = [[NSMutableArray alloc]init];
     int count = 0;
     while([array count]<limit){
+        NSDate *nextdate = [date dateByAddingTimeInterval:(count * 60)];
+        
+        if([endDate compare:nextdate] == NSOrderedAscending){
+            NSLog(@"breaking out");
+            break;
+        }
+        
         CLKComplicationTimelineEntry *entry = [[CLKComplicationTimelineEntry alloc]init];
         
         CLKComplicationTemplateUtilitarianSmallRingText *templ = [[CLKComplicationTemplateUtilitarianSmallRingText alloc]init];
@@ -107,24 +153,25 @@
         
         CLKImageProvider *imageprovider = [[CLKImageProvider alloc]init];
         imageprovider.onePieceImage = image;
-        NSDate *nextdate = [date dateByAddingTimeInterval:(count * 60)];
+        
         NSNumber *calculatedFloat = [currentHelper estimateLevelWithDate:nextdate];
-        NSLog(@"calculated float for %@ is %@",date,calculatedFloat);
-        NSString *floatstring = [calculatedFloat stringValue];
-        NSLog(@"calculated float stringvalue is %@",floatstring);
+        
+        NSNumber *percentFloat = [NSNumber numberWithFloat:([calculatedFloat floatValue] * 100.0)];
+        
+        NSString *floatstring = [percentFloat stringValue];
         CLKTextProvider *text = [CLKTextProvider textProviderWithFormat:@"%@", floatstring];
         [templ setTextProvider:text];
         [templ setFillFraction:[calculatedFloat floatValue]];
         
-        [entry setDate:currentHelper.date];
+        [entry setDate:nextdate];
         [entry setComplicationTemplate:templ];
         
         [array addObject:entry];
         count++;
     }
-    
-    
-    handler([NSArray arrayWithArray:array]);
+    NSArray *finalArray = [NSArray arrayWithArray:array];
+    NSLog(@"%@",finalArray);
+    handler(finalArray);
 }
 
 #pragma mark - Placeholder Templates

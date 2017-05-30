@@ -53,6 +53,11 @@
         CLKComplicationTemplateUtilitarianSmallRingText *templ = [[CLKComplicationTemplateUtilitarianSmallRingText alloc]init];
         
         UIImage *image = [UIImage imageNamed:@"Utilitarian"];
+        
+        if([[currentHelper status] isEqual:[NSNumber numberWithInt:2]]){
+            image = [UIImage imageNamed:@"Complication/Charging"];
+        }
+        
         CLKImageProvider *imageprovider = [[CLKImageProvider alloc]init];
         imageprovider.onePieceImage = image;
         

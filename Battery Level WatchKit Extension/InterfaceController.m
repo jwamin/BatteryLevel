@@ -12,6 +12,7 @@
 
 @interface InterfaceController ()
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *label;
+@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *deviceNameLabel;
 @property ExtensionDelegate *delegate;
 @end
 
@@ -27,8 +28,10 @@
 
  -(void)setLabel{
      //NSString *bkupstr = @"unset";
-     NSString *setstr = [[_delegate.helper levelFloat]stringValue];
+     NSString *setstr = [[[_delegate.helper levelFloat]stringValue] stringByAppendingString:@"%"];
+     NSString *devicestr = [_delegate.helper name];
      [_label setText:setstr];
+     [_deviceNameLabel setText:devicestr];
      NSLog(@"did set label to %@",setstr);
 
  }

@@ -48,16 +48,16 @@
         NSNumber *batteryLevelfloat = [NSNumber numberWithFloat:batteryLevel];
         NSNumber *statusEnum = [NSNumber numberWithLong:state];
         NSDate *now = [[NSDate alloc]init];
-        NSDictionary *dict = @{@"currentLevelFloat":batteryLevelfloat,@"batteryStatus":statusEnum,@"currentDate":now};
+        NSDictionary *dict = @{@"currentLevelFloat":batteryLevelfloat,@"batteryStatus":statusEnum,@"currentDate":now,@"deviceName":[[UIDevice currentDevice]name]};
         [session sendMessage:dict replyHandler:nil errorHandler:nil];
         replyHandler(dict);
     } else if([[message objectForKey:@"request"] isEqual:@"dummyBatteryLevelandStatus"]){
         float batteryLevel = 76.0;
-        long state = 1;
+        long state = 2;
         NSNumber *batteryLevelfloat = [NSNumber numberWithFloat:batteryLevel];
         NSNumber *statusEnum = [NSNumber numberWithLong:state];
         NSDate *now = [[NSDate alloc]init];
-        NSDictionary *dict = @{@"currentLevelFloat":batteryLevelfloat,@"batteryStatus":statusEnum,@"currentDate":now};
+        NSDictionary *dict = @{@"currentLevelFloat":batteryLevelfloat,@"batteryStatus":statusEnum,@"currentDate":now,@"deviceName":[[UIDevice currentDevice]name]};
         [session sendMessage:dict replyHandler:nil errorHandler:nil];
         replyHandler(dict);
     }

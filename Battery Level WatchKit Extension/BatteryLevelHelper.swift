@@ -27,20 +27,22 @@ class BatteryLevelHelper : NSObject {
     var levelFloat:NSNumber!
     var status:NSNumber!
     var date:NSDate!
+    var name:NSString!
     var delegate:BatteryLevelHelperDelegate?
+    
     override init(){
         super.init()
+        
         ready = NSNumber.init(booleanLiteral: false);
         print(ready)
-        
         session = WCSession.default()
         
     }
     
     func sendRequestMessage(){
         
-        let requestDict:[String:Any] = ["request":"currentBatteryLevelandStatus"];
-        //let requestDict:[String:Any] = ["request":"dummyBatteryLevelandStatus"];
+        //let requestDict:[String:Any] = ["request":"currentBatteryLevelandStatus"];
+        let requestDict:[String:Any] = ["request":"dummyBatteryLevelandStatus"];
         session.sendMessage(requestDict, replyHandler: {
             (answer: [String : Any]) in
             print("hello world success \(answer)")
@@ -54,6 +56,7 @@ class BatteryLevelHelper : NSObject {
         date = message["currentDate"] as! NSDate;
         status = message["batteryStatus"] as! NSNumber;
         levelFloat = message["currentLevelFloat"] as! NSNumber;
+        name = message["deviceName"] as! NSString;
         ready = NSNumber.init(booleanLiteral: true);
         print(ready)
         print(date,status,levelFloat)

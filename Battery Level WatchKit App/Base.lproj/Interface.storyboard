@@ -14,7 +14,8 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController">
                     <items>
-                        <label width="136" height="165" alignment="left" text="Loading" textAlignment="center" baselineAdjustment="alignCenters" id="lJN-cL-Ui3"/>
+                        <label width="1" height="24" alignment="center" verticalAlignment="center" text="Level" textAlignment="center" baselineAdjustment="alignCenters" id="lJN-cL-Ui3"/>
+                        <label width="1" alignment="center" verticalAlignment="center" text="DeviceName" textAlignment="center" id="IjC-b2-UFh"/>
                     </items>
                     <menu key="menu" id="E7U-t1-FbN">
                         <items>
@@ -26,11 +27,12 @@
                         </items>
                     </menu>
                     <connections>
+                        <outlet property="deviceNameLabel" destination="IjC-b2-UFh" id="sCb-Ti-zfd"/>
                         <outlet property="label" destination="lJN-cL-Ui3" id="Ll0-rU-mNE"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="220" y="335"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

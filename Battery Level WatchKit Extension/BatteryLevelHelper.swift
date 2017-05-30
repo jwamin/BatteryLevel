@@ -92,7 +92,7 @@ class BatteryLevelHelper : NSObject {
         
         let datecompare = minutes(to: date as Date)
         
-        let rate = 0.01;
+        let rate = 0.005;
         
         var returnfloat:Float;
         

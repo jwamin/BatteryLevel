@@ -20,19 +20,27 @@
 @implementation InterfaceController
 
 - (void)awakeWithContext:(id)context {
+    
     [super awakeWithContext:context];
     _delegate = (ExtensionDelegate*)[[WKExtension sharedExtension] delegate];
+    
     // Configure interface objects here.
-    [self setLabel];
+    [_delegate forceRefresh];
+    
 }
 
  -(void)setLabel{
-     //NSString *bkupstr = @"unset";
-     NSNumber *percentNumber = [NSNumber numberWithFloat:([[_delegate.helper levelFloat]floatValue] * 100)];
+     
+     //ok this processing is in the Interface controller?
+     NSNumber *percentNumber = [NSNumber numberWithInteger:((int)roundf([[_delegate.helper levelFloat]floatValue] * 100))];
      NSString *setstr = [[percentNumber stringValue] stringByAppendingString:@"%"];
      NSString *devicestr = [_delegate.helper name];
+     
+     //Set label
      [_label setText:setstr];
      [_deviceNameLabel setText:devicestr];
+     
+     //Log
      NSLog(@"did set label to %@",setstr);
 
  }

@@ -50,28 +50,15 @@
         NSLog(@"helper is ready and has values");
         
         CLKComplicationTimelineEntry *entry = [[CLKComplicationTimelineEntry alloc]init];
-        CLKComplicationTemplateUtilitarianSmallRingText *templ = [[CLKComplicationTemplateUtilitarianSmallRingText alloc]init];
-        
-        UIImage *image = [UIImage imageNamed:@"Utilitarian"];
-        
-        if([[currentHelper status] isEqual:[NSNumber numberWithInt:2]]){
-            image = [UIImage imageNamed:@"Complication/Charging"];
-        }
-        
-        CLKImageProvider *imageprovider = [[CLKImageProvider alloc]init];
-        imageprovider.onePieceImage = image;
-        NSNumber *calculatedFloat = [NSNumber numberWithFloat:([[currentHelper levelFloat]floatValue]*100)];
-        NSString *floatstring = [calculatedFloat stringValue];
-        CLKTextProvider *text = [CLKTextProvider textProviderWithFormat:@"%@", floatstring];
-        [templ setTextProvider:text];
-        [templ setFillFraction:[[currentHelper levelFloat]floatValue]];
-        
+        CLKComplicationTemplate *templ = [self createComplicationforDate:currentHelper.date withHelper:currentHelper];
         [entry setDate:currentHelper.date];
         [entry setComplicationTemplate:templ];
         
         handler(entry);
     } else {
         NSLog(@"nilling out");
+        //reload
+        [myDelegate forceRefresh];
         handler(nil);
     }
     
@@ -143,25 +130,8 @@
         
         CLKComplicationTimelineEntry *entry = [[CLKComplicationTimelineEntry alloc]init];
         
-        CLKComplicationTemplateUtilitarianSmallRingText *templ = [[CLKComplicationTemplateUtilitarianSmallRingText alloc]init];
+        CLKComplicationTemplate *templ = [self createComplicationforDate:nextdate withHelper:currentHelper];
         
-        UIImage *image = [UIImage imageNamed:@"Utilitarian"];
-        
-        if([[currentHelper status] isEqual:[NSNumber numberWithInt:2]]){
-            image = [UIImage imageNamed:@"Complication/Charging"];
-        }
-        
-        CLKImageProvider *imageprovider = [[CLKImageProvider alloc]init];
-        imageprovider.onePieceImage = image;
-        
-        NSNumber *calculatedFloat = [currentHelper estimateLevelWithDate:nextdate];
-        
-        NSNumber *percentFloat = [NSNumber numberWithFloat:([calculatedFloat floatValue] * 100)];
-        NSLog(@"%@",percentFloat);
-        NSString *floatstring = [percentFloat stringValue];
-        CLKTextProvider *text = [CLKTextProvider textProviderWithFormat:@"%@", floatstring];
-        [templ setTextProvider:text];
-        [templ setFillFraction:[calculatedFloat floatValue]];
         
         [entry setDate:nextdate];
         [entry setComplicationTemplate:templ];
@@ -177,6 +147,7 @@
 #pragma mark - Placeholder Templates
 
 - (void)getLocalizableSampleTemplateForComplication:(CLKComplication *)complication withHandler:(void(^)(CLKComplicationTemplate * __nullable complicationTemplate))handler {
+    
     CLKComplicationTemplateUtilitarianSmallRingText *templ = [[CLKComplicationTemplateUtilitarianSmallRingText alloc]init];
     UIImage *image = [UIImage imageNamed:@"Utilitarian"];
     CLKImageProvider *imageprovider = [[CLKImageProvider alloc]init];
@@ -188,6 +159,31 @@
     [templ setFillFraction:100.0];
     handler(templ);
     
+}
+
+-(CLKComplicationTemplate*)createComplicationforDate:(NSDate *)date withHelper:(BatteryLevelHelper *)helper{
+    
+    CLKComplicationTemplateUtilitarianSmallRingText *templ = [[CLKComplicationTemplateUtilitarianSmallRingText alloc]init];
+    
+    UIImage *image = [UIImage imageNamed:@"Utilitarian"];
+    
+    if([[helper status] isEqual:[NSNumber numberWithInt:2]]){
+        image = [UIImage imageNamed:@"Complication/Charging"];
+    }
+    
+    CLKImageProvider *imageprovider = [[CLKImageProvider alloc]init];
+    imageprovider.onePieceImage = image;
+    
+    NSNumber *calculatedFloat = [helper estimateLevelWithDate:date];
+    
+    NSNumber *percentFloat = [NSNumber numberWithInteger:((int)roundf([calculatedFloat floatValue] * 100))];
+    NSLog(@"%@",percentFloat);
+    NSString *floatstring = [percentFloat stringValue];
+    CLKTextProvider *text = [CLKTextProvider textProviderWithFormat:@"%@", floatstring];
+    [templ setTextProvider:text];
+    [templ setFillFraction:[calculatedFloat floatValue]];
+    
+    return templ;
 }
 
 @end

@@ -19,7 +19,7 @@
                     </items>
                     <menu key="menu" id="E7U-t1-FbN">
                         <items>
-                            <menuItem title="Menu Item" icon="resume" id="SLL-LG-lAK">
+                            <menuItem title="Reload" icon="resume" id="SLL-LG-lAK">
                                 <connections>
                                     <action selector="reload" destination="AgC-eL-Hgc" id="i7o-V9-Fdh"/>
                                 </connections>

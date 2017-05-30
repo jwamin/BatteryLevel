@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    [[UIDevice currentDevice]setBatteryMonitoringEnabled:YES];
     float level = [[UIDevice currentDevice]batteryLevel];
     NSLog(@"%f",level);
     if([WCSession isSupported]){
@@ -55,7 +55,7 @@
         [session sendMessage:dict replyHandler:nil errorHandler:nil];
         replyHandler(dict);
     } else if([[message objectForKey:@"request"] isEqual:@"dummyBatteryLevelandStatus"]){
-        float batteryLevel = 76.0;
+        float batteryLevel = 0.76;
         long state = 2;
         NSNumber *batteryLevelfloat = [NSNumber numberWithFloat:batteryLevel];
         NSNumber *statusEnum = [NSNumber numberWithLong:state];

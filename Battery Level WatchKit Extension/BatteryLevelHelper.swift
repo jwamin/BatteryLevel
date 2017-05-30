@@ -5,7 +5,13 @@
 //  Created by Joss Manger on 5/29/17.
 //  Copyright © 2017 Joss Manger. All rights reserved.
 //
-import UIKit
+
+#if arch(i386) || arch(x86_64)
+    let simulator = true;
+#else
+    let simulator = false;
+#endif
+
 import WatchKit
 import WatchConnectivity
 
@@ -23,6 +29,7 @@ enum statusEnum {
 func minutes(to date: Date) -> Int {
     return Calendar.current.dateComponents([.minute], from: Date.init(), to: date).minute ?? 0
 }
+
 
 
 
@@ -46,16 +53,22 @@ class BatteryLevelHelper : NSObject {
     }
     
     func sendRequestMessage(){
+        print("simulator: \(simulator)");
+        var requestDict:[String:Any]!
         
-        //let requestDict:[String:Any] = ["request":"currentBatteryLevelandStatus"];
-        let requestDict:[String:Any] = ["request":"dummyBatteryLevelandStatus"];
+        if(simulator){
+            requestDict = ["request":"dummyBatteryLevelandStatus"];
+        } else {
+            requestDict = ["request":"currentBatteryLevelandStatus"];
+        }
+        
         session.sendMessage(requestDict, replyHandler: {
             (answer: [String : Any]) in
             print("hello world success \(answer)")
             self.setInstanceVariables(message: answer)
         }, errorHandler: {(_: Error) in
             print("hello world error")
-    })
+        })
     }
     
     func setInstanceVariables(message:[String : Any]){
@@ -84,9 +97,9 @@ class BatteryLevelHelper : NSObject {
         var returnfloat:Float;
         
         if(status == 2){
-            returnfloat = (levelFloat.floatValue/100) + Float((rate * Double(datecompare)))
+            returnfloat = levelFloat.floatValue + Float((rate * Double(datecompare)))
         } else {
-            returnfloat = (levelFloat.floatValue/100) - Float((rate * Double(datecompare)))
+            returnfloat = levelFloat.floatValue - Float((rate * Double(datecompare)))
         }
         
         if(returnfloat>1.0){

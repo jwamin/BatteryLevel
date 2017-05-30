@@ -28,7 +28,8 @@
 
  -(void)setLabel{
      //NSString *bkupstr = @"unset";
-     NSString *setstr = [[[_delegate.helper levelFloat]stringValue] stringByAppendingString:@"%"];
+     NSNumber *percentNumber = [NSNumber numberWithFloat:([[_delegate.helper levelFloat]floatValue] * 100)];
+     NSString *setstr = [[percentNumber stringValue] stringByAppendingString:@"%"];
      NSString *devicestr = [_delegate.helper name];
      [_label setText:setstr];
      [_deviceNameLabel setText:devicestr];

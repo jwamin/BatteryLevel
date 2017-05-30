@@ -60,11 +60,11 @@
         
         CLKImageProvider *imageprovider = [[CLKImageProvider alloc]init];
         imageprovider.onePieceImage = image;
-        
-        NSString *floatstring = [[currentHelper levelFloat]stringValue];
+        NSNumber *calculatedFloat = [NSNumber numberWithFloat:([[currentHelper levelFloat]floatValue]*100)];
+        NSString *floatstring = [calculatedFloat stringValue];
         CLKTextProvider *text = [CLKTextProvider textProviderWithFormat:@"%@", floatstring];
         [templ setTextProvider:text];
-        [templ setFillFraction:[[currentHelper levelFloat]floatValue]/100];
+        [templ setFillFraction:[[currentHelper levelFloat]floatValue]];
         
         [entry setDate:currentHelper.date];
         [entry setComplicationTemplate:templ];
@@ -75,50 +75,50 @@
         handler(nil);
     }
     
-
+    
     
     
 }
 
 - (void)getTimelineEntriesForComplication:(CLKComplication *)complication beforeDate:(NSDate *)date limit:(NSUInteger)limit withHandler:(void(^)(NSArray<CLKComplicationTimelineEntry *> * __nullable entries))handler {
     // Call the handler with the timeline entries prior to the given date
-//    ExtensionDelegate* myDelegate = (ExtensionDelegate*)[[WKExtension sharedExtension] delegate];
-//    
-//    BatteryLevelHelper *currentHelper = [myDelegate helper];
-//    
-//    NSMutableArray *array = [[NSMutableArray alloc]init];
-//    int count = 0;
-//    while([array count]<limit){
-//        CLKComplicationTimelineEntry *entry = [[CLKComplicationTimelineEntry alloc]init];
-//        
-//        CLKComplicationTemplateUtilitarianSmallRingText *templ = [[CLKComplicationTemplateUtilitarianSmallRingText alloc]init];
-//        
-//        UIImage *image = [UIImage imageNamed:@"Utilitarian"];
-//        
-//        if([[currentHelper status] isEqual:[NSNumber numberWithInt:2]]){
-//            image = [UIImage imageNamed:@"Complication/Charging"];
-//        }
-//        
-//        CLKImageProvider *imageprovider = [[CLKImageProvider alloc]init];
-//        imageprovider.onePieceImage = image;
-//        NSDate *nextdate = [date dateByAddingTimeInterval:(-count * 60)];
-//        NSNumber *calculatedFloat = [currentHelper estimateLevelWithDate:nextdate];
-//        NSLog(@"calculated float for %@ is %@",date,calculatedFloat);
-//        NSString *floatstring = [calculatedFloat stringValue];
-//        NSLog(@"calculated float stringvalue is %@",floatstring);
-//        CLKTextProvider *text = [CLKTextProvider textProviderWithFormat:@"%@", floatstring];
-//        [templ setTextProvider:text];
-//        [templ setFillFraction:[calculatedFloat floatValue]];
-//        
-//        [entry setDate:currentHelper.date];
-//        [entry setComplicationTemplate:templ];
-//        
-//        [array addObject:entry];
-//        count++;
-//    }
-//    
-//    
-//    handler([NSArray arrayWithArray:array]);
+    //    ExtensionDelegate* myDelegate = (ExtensionDelegate*)[[WKExtension sharedExtension] delegate];
+    //
+    //    BatteryLevelHelper *currentHelper = [myDelegate helper];
+    //
+    //    NSMutableArray *array = [[NSMutableArray alloc]init];
+    //    int count = 0;
+    //    while([array count]<limit){
+    //        CLKComplicationTimelineEntry *entry = [[CLKComplicationTimelineEntry alloc]init];
+    //
+    //        CLKComplicationTemplateUtilitarianSmallRingText *templ = [[CLKComplicationTemplateUtilitarianSmallRingText alloc]init];
+    //
+    //        UIImage *image = [UIImage imageNamed:@"Utilitarian"];
+    //
+    //        if([[currentHelper status] isEqual:[NSNumber numberWithInt:2]]){
+    //            image = [UIImage imageNamed:@"Complication/Charging"];
+    //        }
+    //
+    //        CLKImageProvider *imageprovider = [[CLKImageProvider alloc]init];
+    //        imageprovider.onePieceImage = image;
+    //        NSDate *nextdate = [date dateByAddingTimeInterval:(-count * 60)];
+    //        NSNumber *calculatedFloat = [currentHelper estimateLevelWithDate:nextdate];
+    //        NSLog(@"calculated float for %@ is %@",date,calculatedFloat);
+    //        NSString *floatstring = [calculatedFloat stringValue];
+    //        NSLog(@"calculated float stringvalue is %@",floatstring);
+    //        CLKTextProvider *text = [CLKTextProvider textProviderWithFormat:@"%@", floatstring];
+    //        [templ setTextProvider:text];
+    //        [templ setFillFraction:[calculatedFloat floatValue]];
+    //
+    //        [entry setDate:currentHelper.date];
+    //        [entry setComplicationTemplate:templ];
+    //
+    //        [array addObject:entry];
+    //        count++;
+    //    }
+    //
+    //
+    //    handler([NSArray arrayWithArray:array]);
     handler(nil);
 }
 
@@ -156,8 +156,8 @@
         
         NSNumber *calculatedFloat = [currentHelper estimateLevelWithDate:nextdate];
         
-        NSNumber *percentFloat = [NSNumber numberWithFloat:([calculatedFloat floatValue] * 100.0)];
-        
+        NSNumber *percentFloat = [NSNumber numberWithFloat:([calculatedFloat floatValue] * 100)];
+        NSLog(@"%@",percentFloat);
         NSString *floatstring = [percentFloat stringValue];
         CLKTextProvider *text = [CLKTextProvider textProviderWithFormat:@"%@", floatstring];
         [templ setTextProvider:text];

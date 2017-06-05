@@ -30,9 +30,6 @@ func minutes(to date: Date) -> Int {
     return Calendar.current.dateComponents([.minute], from: Date.init(), to: date).minute ?? 0
 }
 
-
-
-
 class BatteryLevelHelper : NSObject {
     
     var session:WCSession!

@@ -23,9 +23,10 @@
     
     [super awakeWithContext:context];
     _delegate = (ExtensionDelegate*)[[WKExtension sharedExtension] delegate];
-    
+    [_label setText:@""];
+    [_deviceNameLabel setText:@""];
     // Configure interface objects here.
-    [_delegate forceRefresh];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(setLabel) name:@"gotData" object:nil];
     
 }
 
@@ -33,15 +34,21 @@
      
      //ok this processing is in the Interface controller?
      NSNumber *percentNumber = [NSNumber numberWithInteger:((int)roundf([[_delegate.helper levelFloat]floatValue] * 100))];
-     NSString *setstr = [[percentNumber stringValue] stringByAppendingString:@"%"];
-     NSString *devicestr = [_delegate.helper name];
-     
-     //Set label
-     [_label setText:setstr];
-     [_deviceNameLabel setText:devicestr];
-     
-     //Log
-     NSLog(@"did set label to %@",setstr);
+     NSLog(@"percentnumber: %@",percentNumber);
+     if([percentNumber intValue]>0){
+         NSString *setstr = [[percentNumber stringValue] stringByAppendingString:@"%"];
+         NSString *devicestr = [_delegate.helper name];
+         
+         //Set label
+         [_label setText:setstr];
+         [_deviceNameLabel setText:devicestr];
+         
+         //Log
+         NSLog(@"did set label to %@",setstr);
+     } else {
+         NSLog(@"zeroed out");
+     }
+
 
  }
 

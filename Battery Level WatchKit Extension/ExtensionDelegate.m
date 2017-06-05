@@ -45,7 +45,7 @@
 {
     
     NSLog(@"got data in delegate");
-    [_mainView setLabel];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotData" object:nil];
     CLKComplication *active = [[[CLKComplicationServer sharedInstance]activeComplications]objectAtIndex:0];
     [[CLKComplicationServer sharedInstance]reloadTimelineForComplication:active];
     

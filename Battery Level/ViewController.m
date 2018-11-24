@@ -17,6 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [[self view] setBackgroundColor:[UIColor blackColor]];
+    [[self levelLabel]setTextColor:[UIColor whiteColor]];
+    [[self deviceLabel]setTextColor:[UIColor whiteColor]];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -28,6 +31,7 @@
 }
 
 -(void)updateUI{
+    //NSLog(@"Updating UI?");
     NSString *percentString = [[NSNumber numberWithFloat:([[UIDevice currentDevice]batteryLevel] * 100.0)]stringValue];
     [_levelLabel setText:[percentString stringByAppendingString:@"%"]];
     [_deviceLabel setText:[[UIDevice currentDevice]name]];

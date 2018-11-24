@@ -24,11 +24,17 @@
         _session = [WCSession defaultSession];
         [_session setDelegate:self];
         [_session activateSession];
-        
+        NSLog(@"session supported, activated");
     }
     
 }
 
+
+- (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message{
+    for (id key in message) {
+        NSLog(@"key: %@, value: %@ \n", key, [message objectForKey:key]);
+    }
+}
 -(void)session:(WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(NSError *)error{
     
     [_helper sendRequestMessage];
@@ -46,8 +52,8 @@
     
     NSLog(@"got data in delegate");
     [[NSNotificationCenter defaultCenter] postNotificationName:@"gotData" object:nil];
-    CLKComplication *active = [[[CLKComplicationServer sharedInstance]activeComplications]objectAtIndex:0];
-    [[CLKComplicationServer sharedInstance]reloadTimelineForComplication:active];
+    //CLKComplication *active = [[[CLKComplicationServer sharedInstance]activeComplications]objectAtIndex:0];
+    //[[CLKComplicationServer sharedInstance]reloadTimelineForComplication:active];
     
 }
 

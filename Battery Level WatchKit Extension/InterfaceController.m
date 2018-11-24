@@ -59,6 +59,7 @@
 -(void)didAppear{
     NSLog(@"did appear");
     [self setLabel];
+    NSLog(@"err hello");
 }
 
 - (void)willActivate {

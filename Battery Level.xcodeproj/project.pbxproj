@@ -101,6 +101,7 @@
 		3D3859E21ED768A80050FA87 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3DE4A7721EDC680C00D0A396 /* Battery Level WatchKit Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Battery Level WatchKit Extension-Bridging-Header.h"; sourceTree = "<group>"; };
 		3DE4A7731EDC680D00D0A396 /* BatteryLevelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatteryLevelHelper.swift; sourceTree = "<group>"; };
+		570E220B223F91740081FB97 /* Messages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +151,7 @@
 				3D3859DF1ED755670050FA87 /* Battery Level.entitlements */,
 				3D38599C1ED6437B0050FA87 /* AppDelegate.h */,
 				3D38599D1ED6437B0050FA87 /* AppDelegate.m */,
+				570E220B223F91740081FB97 /* Messages.h */,
 				3D38599F1ED6437B0050FA87 /* ViewController.h */,
 				3D3859A01ED6437B0050FA87 /* ViewController.m */,
 				3D3859A21ED6437B0050FA87 /* Main.storyboard */,

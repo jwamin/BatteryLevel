@@ -69,10 +69,10 @@ class BatteryLevelHelper : NSObject {
     }
     
     func setInstanceVariables(message:[String : Any]){
-        date = message["currentDate"] as! NSDate;
-        status = message["batteryStatus"] as! NSNumber;
-        levelFloat = message["currentLevelFloat"] as! NSNumber;
-        name = message["deviceName"] as! NSString;
+        date = message["currentDate"] as? NSDate;
+        status = message["batteryStatus"] as? NSNumber;
+        levelFloat = message["currentLevelFloat"] as? NSNumber;
+        name = message["deviceName"] as? NSString;
         ready = NSNumber.init(booleanLiteral: true);
         print(ready)
         print(date,status,levelFloat)
@@ -93,10 +93,13 @@ class BatteryLevelHelper : NSObject {
         
         var returnfloat:Float;
         
-        if(status == 2){
-            returnfloat = levelFloat.floatValue + Float((rate * Double(datecompare)))
-        } else {
-            returnfloat = levelFloat.floatValue - Float((rate * Double(datecompare)))
+        let increment = Float((rate * Double(datecompare)))
+        
+        switch status {
+            case 2:
+                returnfloat = levelFloat.floatValue + increment
+            default:
+                returnfloat = levelFloat.floatValue - increment
         }
         
         if(returnfloat>1.0){

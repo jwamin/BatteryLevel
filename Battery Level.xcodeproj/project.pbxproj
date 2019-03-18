@@ -24,6 +24,7 @@
 		3D3859D01ED6437C0050FA87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D3859CF1ED6437C0050FA87 /* Assets.xcassets */; };
 		3D3859E31ED768A80050FA87 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3D3859E11ED768A80050FA87 /* LICENSE */; };
 		3DE4A7741EDC680D00D0A396 /* BatteryLevelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE4A7731EDC680D00D0A396 /* BatteryLevelHelper.swift */; };
+		57B239E9223FAD4C00CFCA37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D3859CF1ED6437C0050FA87 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -334,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D3859B61ED6437B0050FA87 /* Assets.xcassets in Resources */,
+				57B239E9223FAD4C00CFCA37 /* Assets.xcassets in Resources */,
 				3D3859B41ED6437B0050FA87 /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

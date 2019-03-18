@@ -23,7 +23,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [self updateUI];
+    [self updateUI]; 
 }
 
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

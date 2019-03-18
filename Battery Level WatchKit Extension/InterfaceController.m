@@ -14,6 +14,9 @@
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *label;
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *deviceNameLabel;
 @property ExtensionDelegate *delegate;
+@property (weak, nonatomic) IBOutlet WKInterfaceImage *image;
+@property UIImage *chargingImage;
+@property UIImage *fullImage;
 @end
 
 
@@ -25,6 +28,10 @@
     _delegate = (ExtensionDelegate*)[[WKExtension sharedExtension] delegate];
     [_label setText:@""];
     [_deviceNameLabel setText:@""];
+    
+    _chargingImage = [UIImage imageNamed:@"Complication/Charging"];
+    _fullImage = [UIImage imageNamed:@"Complication/Utilitarian"];
+    [_image setTintColor:[UIColor greenColor]];
     // Configure interface objects here.
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(setLabel) name:@"gotData" object:nil];
     
@@ -43,6 +50,15 @@
          [_label setText:setstr];
          [_deviceNameLabel setText:devicestr];
          
+         NSLog(@"chargeimage,%@",_chargingImage);
+         NSLog(@"status %@",_delegate.helper.status);
+         if([_delegate.helper.status isEqualToNumber:[NSNumber numberWithInt:2]]){
+              [_image setImage:_chargingImage];
+         } else {
+              [_image setImage:_fullImage];
+             
+         }
+         NSLog(@"set imageview image to: %@",_image);
          //Log
          NSLog(@"did set label to %@",setstr);
      } else {

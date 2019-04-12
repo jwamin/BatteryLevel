@@ -7,6 +7,7 @@
 //
 
 #import "ExtensionDelegate.h"
+#import "BatteryLevel-Swift.h"
 
 
 @implementation ExtensionDelegate
@@ -36,8 +37,8 @@
     }
 }
 -(void)session:(WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(NSError *)error{
-    
-    [_helper sendRequestMessage];
+    //[_helper estimateLevelWithDate:[NSDate new]];
+    //[_helper sendRequestMessage];
     
 }
 
@@ -73,7 +74,7 @@
         if ([task isKindOfClass:[WKApplicationRefreshBackgroundTask class]]) {
             // Be sure to complete the background task once you’re done.
             WKApplicationRefreshBackgroundTask *backgroundTask = (WKApplicationRefreshBackgroundTask*)task;
-            [backgroundTask setTaskCompleted];
+            [backgroundTask setTaskCompletedWithSnapshot:NO];
         } else if ([task isKindOfClass:[WKSnapshotRefreshBackgroundTask class]]) {
             // Snapshot tasks have a unique completion call, make sure to set your expiration date
             WKSnapshotRefreshBackgroundTask *snapshotTask = (WKSnapshotRefreshBackgroundTask*)task;
@@ -81,14 +82,14 @@
         } else if ([task isKindOfClass:[WKWatchConnectivityRefreshBackgroundTask class]]) {
             // Be sure to complete the background task once you’re done.
             WKWatchConnectivityRefreshBackgroundTask *backgroundTask = (WKWatchConnectivityRefreshBackgroundTask*)task;
-            [backgroundTask setTaskCompleted];
+            [backgroundTask setTaskCompletedWithSnapshot:NO];
         } else if ([task isKindOfClass:[WKURLSessionRefreshBackgroundTask class]]) {
             // Be sure to complete the background task once you’re done.
             WKURLSessionRefreshBackgroundTask *backgroundTask = (WKURLSessionRefreshBackgroundTask*)task;
-            [backgroundTask setTaskCompleted];
+            [backgroundTask setTaskCompletedWithSnapshot:NO];
         } else {
             // make sure to complete unhandled task types
-            [task setTaskCompleted];
+            [task setTaskCompletedWithSnapshot:NO];
         }
     }
 }

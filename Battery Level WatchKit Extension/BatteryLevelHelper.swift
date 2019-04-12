@@ -22,7 +22,7 @@ enum statusEnum {
     case full
 }
 
-@objc protocol BatteryLevelHelperDelegate{
+@objc public protocol BatteryLevelHelperDelegate{
     func dataReady();
 }
 
@@ -30,26 +30,26 @@ func minutes(to date: Date) -> Int {
     return Calendar.current.dateComponents([.minute], from: Date.init(), to: date).minute ?? 0
 }
 
-class BatteryLevelHelper : NSObject {
+public class BatteryLevelHelper : NSObject {
     
-    var session:WCSession!
-    var ready:NSNumber!
-    var levelFloat:NSNumber!
-    var status:NSNumber!
-    var date:NSDate!
-    var name:NSString!
-    var delegate:BatteryLevelHelperDelegate?
+    @objc public private(set) var session:WCSession!
+    @objc public private(set) var ready:NSNumber!
+    @objc public private(set) var levelFloat:NSNumber!
+    @objc public private(set) var status:NSNumber!
+    @objc public private(set) var date:NSDate!
+    @objc public private(set) var name:NSString!
+    @objc public var delegate:BatteryLevelHelperDelegate?
     
     override init(){
         super.init()
         
         ready = NSNumber.init(booleanLiteral: false);
         print(ready)
-        session = WCSession.default()
+        session = WCSession.default
         
     }
     
-    func sendRequestMessage(){
+    @objc public func sendRequestMessage(){
         print("simulator: \(simulator)");
         var requestDict:[String:Any]!
         
@@ -68,7 +68,7 @@ class BatteryLevelHelper : NSObject {
         })
     }
     
-    func setInstanceVariables(message:[String : Any]){
+    @objc func setInstanceVariables(message:[String : Any]){
         date = message["currentDate"] as? NSDate;
         status = message["batteryStatus"] as? NSNumber;
         levelFloat = message["currentLevelFloat"] as? NSNumber;
@@ -95,11 +95,17 @@ class BatteryLevelHelper : NSObject {
         
         let increment = Float((rate * Double(datecompare)))
         
+        guard let level = levelFloat else {
+            return NSNumber(floatLiteral: 0.0)
+        }
+        
+        let floatval = level.floatValue
+        
         switch status {
             case 2:
-                returnfloat = levelFloat.floatValue + increment
+                returnfloat = floatval + increment
             default:
-                returnfloat = levelFloat.floatValue - increment
+                returnfloat = floatval - increment
         }
         
         if(returnfloat>1.0){

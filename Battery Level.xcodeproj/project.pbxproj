@@ -23,7 +23,7 @@
 		3D3859CE1ED6437C0050FA87 /* ComplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3859CD1ED6437C0050FA87 /* ComplicationController.m */; };
 		3D3859D01ED6437C0050FA87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D3859CF1ED6437C0050FA87 /* Assets.xcassets */; };
 		3D3859E31ED768A80050FA87 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3D3859E11ED768A80050FA87 /* LICENSE */; };
-		3DE4A7741EDC680D00D0A396 /* BatteryLevelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE4A7731EDC680D00D0A396 /* BatteryLevelHelper.swift */; };
+		576367092260C093000A9DDF /* BatteryLevelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE4A7731EDC680D00D0A396 /* BatteryLevelHelper.swift */; };
 		57B239E9223FAD4C00CFCA37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D3859CF1ED6437C0050FA87 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -194,10 +194,10 @@
 				3D3859CC1ED6437C0050FA87 /* ComplicationController.h */,
 				3D3859CD1ED6437C0050FA87 /* ComplicationController.m */,
 				3DE4A7731EDC680D00D0A396 /* BatteryLevelHelper.swift */,
+				3DE4A7721EDC680C00D0A396 /* Battery Level WatchKit Extension-Bridging-Header.h */,
 				3D3859CF1ED6437C0050FA87 /* Assets.xcassets */,
 				3D3859D11ED6437C0050FA87 /* Info.plist */,
 				3D3859C11ED6437C0050FA87 /* Supporting Files */,
-				3DE4A7721EDC680C00D0A396 /* Battery Level WatchKit Extension-Bridging-Header.h */,
 			);
 			path = "Battery Level WatchKit Extension";
 			sourceTree = "<group>";
@@ -303,6 +303,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -369,7 +370,7 @@
 				3D3859CE1ED6437C0050FA87 /* ComplicationController.m in Sources */,
 				3D3859C51ED6437C0050FA87 /* InterfaceController.m in Sources */,
 				3D3859CB1ED6437C0050FA87 /* NotificationController.m in Sources */,
-				3DE4A7741EDC680D00D0A396 /* BatteryLevelHelper.swift in Sources */,
+				576367092260C093000A9DDF /* BatteryLevelHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,7 +528,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Battery Level WatchKit Extension/Battery Level WatchKit Extension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 5.1;
 			};
@@ -547,7 +548,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Battery Level WatchKit Extension/Battery Level WatchKit Extension-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 5.1;
 			};

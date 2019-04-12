@@ -58,6 +58,17 @@
               [_image setImage:_fullImage];
              
          }
+         
+         [_image setWidth:0];
+         [_image setHeight:0];
+         
+         [self animateWithDuration:0.5 animations:^{
+             [_image setWidth:40];
+             [_image setHeight:44];
+             [_label setAlpha:1.0];
+         }];
+         
+
          NSLog(@"set imageview image to: %@",_image);
          //Log
          NSLog(@"did set label to %@",setstr);
@@ -74,8 +85,14 @@
 
 -(void)didAppear{
     NSLog(@"did appear");
-    [self setLabel];
+    [self reload];
     NSLog(@"err hello");
+}
+
+- (void)willDisappear{
+    [_image setWidth:0];
+    [_image setHeight:0];
+    [_label setAlpha:0.0];
 }
 
 - (void)willActivate {
